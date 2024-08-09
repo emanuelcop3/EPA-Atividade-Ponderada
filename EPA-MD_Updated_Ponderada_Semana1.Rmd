@@ -1,4 +1,5 @@
 ## Instalação de Pacotes
+
 ```{r}
 # Carregar pacotes
 library(tidyverse)
@@ -7,9 +8,8 @@ library(corrplot)
 library(gridExtra)
 ```
 
+## 1. Carregamento e Preparação dos Dados base 2023
 
-
-### 1. Carregamento e Preparação dos Dados 2023 
 ```{r}
 # 1. Carregamento e Preparação dos Dados 
 # Carregar os dados
@@ -18,15 +18,16 @@ cod_data <- read.csv("C:/Users/Inteli/Downloads/EPA-PONDERADA/2023.csv")
 # Exibir as primeiras linhas do data frame
 head(cod_data, 10)
 ```
-# c) Verificação da estrutura dos dados 
+
+## c) Verificação da estrutura dos dados
+
 ```{r}
 # Verificando a estrutura dos dados
 str(cod_data)
 
 ```
 
-# 2. Resumo Estatístico e Descrição dos Dados 
-
+## 2. Resumo Estatístico e Descrição dos Dados
 
 ```{r}
 # Resumo estatístico das variáveis numéricas
@@ -36,16 +37,15 @@ summary(cod_data,20)
 
 Descrição clara das variáveis no dataset:
 
-- **data**: Data da transação.
-- **cod_vendedor**: Código do vendedor.
-- **cod_loja**: Código da loja onde ocorreu a venda.
-- **cod_transacao**: Código único da transação.
-- **quantidade**: Quantidade de produtos vendidos.
-- **cod_prod**: Código do produto.
-- **preco**: Preço do produto.
+-   **data**: Data da transação.
+-   **cod_vendedor**: Código do vendedor.
+-   **cod_loja**: Código da loja onde ocorreu a venda.
+-   **cod_transacao**: Código único da transação.
+-   **quantidade**: Quantidade de produtos vendidos.
+-   **cod_prod**: Código do produto.
+-   **preco**: Preço do produto.
 
-## 3. Análise Univariada 
-
+## 3. Análise Univariada
 
 ```{r}
 # Histograma da variável 'quantidade'
@@ -53,7 +53,7 @@ hist(cod_data$quantidade,
      main = "Distribuição de Quantidade de Produtos Vendidos", 
      xlab = "Quantidade",  # Rótulo do eixo X
      ylab = "Frequência",  # Rótulo do eixo Y
-     col = "skyblue",  # Cor das barras
+     col = "blue",  # Cor das barras
      border = "white")  # Cor das bordas das barras
 
 # Histograma da variável 'preco'
@@ -61,7 +61,7 @@ hist(cod_data$preco,
      main = "Distribuição de Preços dos Produtos",  
      xlab = "Preço",  # Rótulo do eixo X
      ylab = "Frequência",  # Rótulo do eixo Y
-     col = "lightgreen",  # Cor das barras
+     col = "green",  # Cor das barras
      border = "white")  # Cor das bordas das barras
 
 # Boxplot da variável 'preco'
@@ -76,10 +76,7 @@ boxplot(cod_data$preco,
 
 ```
 
-
-
-## b) Identificação de outliers 
-
+## b) Identificação de outliers
 
 ```{r}
 # Função para identificar outliers usando a regra do IQR
@@ -124,8 +121,7 @@ boxplot(cod_data_sample$quantidade,
 
 ```
 
-# 4. Análise Bivariada 
-
+## 4. Análise Bivariada
 
 ```{r}
 
@@ -149,8 +145,7 @@ abline(lm(cod_data_sample$quantidade ~ cod_data_sample$preco), col = "red", lwd 
 
 ```
 
-# b) Análise de correlação 
-
+## b) Análise de correlação
 
 ```{r}
 # Matriz de correlação
@@ -162,11 +157,12 @@ library(corrplot)
 corrplot(cor_matrix, method = "circle")
 
 ```
-#5. Análise Multivariada 
 
-#a) Análise de Componentes Principais (PCA)
+## 5. Análise Multivariada
 
-#Implementação de PCA:
+## a) Análise de Componentes Principais (PCA)
+
+## Implementação de PCA:
 
 ```{r}
 set.seed(100)  # Para reprodutibilidade
@@ -189,56 +185,43 @@ biplot(pca_result, scale = 0,
        col = c("red", "blue"))
 
 ```
-### 6. Conclusão e Discussão 
 
-#### a) Sumário das descobertas
+## 6. Conclusão e Discussão
+
+## a) Sumário das descobertas
 
 Um sumário das principais descobertas:
 
-- A variável **preco** mostrou-se mais dispersa, com alguns outliers significativos.
-- A correlação entre **quantidade** e **preco** foi moderada.
-- O PCA revelou que a maior parte da variância é explicada pelo primeiro componente.
+-   A variável **preco** mostrou-se mais dispersa, com alguns outliers significativos.
+-   A correlação entre **quantidade** e **preco** foi moderada.
+-   O PCA revelou que a maior parte da variância é explicada pelo primeiro componente.
 
-#### b) Discussão sobre limitações e possíveis melhorias 
+## b) Discussão sobre limitações e possíveis melhorias
 
 Limitações e melhorias:
 
-- A análise foi limitada à variáveis numéricas, sem considerar outras variáveis categóricas.
-- Sugere-se a aplicação de técnicas de clustering ou regressão para análises futuras.
+-   A análise foi limitada à variáveis numéricas, sem considerar outras variáveis categóricas.
+-   Sugere-se a aplicação de técnicas de clustering ou regressão para análises futuras.
 
-### Conclusão
+## Conclusão
 
-A análise dos dados revelou várias informações importantes sobre o comportamento de vendas e preços dos produtos no período examinado. 
+A análise dos dados revelou várias informações importantes sobre o comportamento de vendas e preços dos produtos no período examinado.
 
-1. **Distribuição de Quantidade e Preços**: As distribuições de quantidade e preços dos produtos mostram padrões distintos. A maioria dos produtos tem preços concentrados em uma faixa específica, enquanto as quantidades vendidas variam amplamente, sugerindo uma possível segmentação de mercado onde produtos com preços semelhantes possuem diferentes níveis de demanda.
+1.  **Distribuição de Quantidade e Preços**: As distribuições de quantidade e preços dos produtos mostram padrões distintos. A maioria dos produtos tem preços concentrados em uma faixa específica, enquanto as quantidades vendidas variam amplamente, sugerindo uma possível segmentação de mercado onde produtos com preços semelhantes possuem diferentes níveis de demanda.
 
-2. **Outliers**: A presença de outliers, especialmente nos preços dos produtos, indica que alguns produtos são significativamente mais caros que outros. Esses outliers podem representar produtos premium ou itens de nicho que precisam ser analisados separadamente para entender seu impacto nas vendas gerais.
+2.  **Outliers**: A presença de outliers, especialmente nos preços dos produtos, indica que alguns produtos são significativamente mais caros que outros. Esses outliers podem representar produtos premium ou itens de nicho que precisam ser analisados separadamente para entender seu impacto nas vendas gerais.
 
-3. **Correlação entre Variáveis**: A análise de correlação revelou relações importantes entre as variáveis, como a correlação moderada entre a quantidade vendida e o preço do produto. Isso pode indicar que, em algumas categorias, um aumento no preço está associado a uma diminuição na quantidade vendida, sugerindo uma sensibilidade ao preço.
+3.  **Correlação entre Variáveis**: A análise de correlação revelou relações importantes entre as variáveis, como a correlação moderada entre a quantidade vendida e o preço do produto. Isso pode indicar que, em algumas categorias, um aumento no preço está associado a uma diminuição na quantidade vendida, sugerindo uma sensibilidade ao preço.
 
-4. **Componentes Principais (PCA)**: A Análise de Componentes Principais permitiu identificar os fatores mais influentes que explicam a variabilidade nos dados. Isso é útil para reduzir a dimensionalidade e focar nas variáveis mais significativas para futuras análises.
+4.  **Componentes Principais (PCA)**: A Análise de Componentes Principais permitiu identificar os fatores mais influentes que explicam a variabilidade nos dados. Isso é útil para reduzir a dimensionalidade e focar nas variáveis mais significativas para futuras análises.
 
-### Limitações e Melhorias Futuras
+## Limitações e Melhorias Futuras
 
 A análise realizada tem algumas limitações, como a falta de informações contextuais adicionais (por exemplo, promoções, sazonalidade, ou características demográficas) que poderiam influenciar os padrões de vendas e preços. Além disso, uma análise temporal mais detalhada poderia revelar tendências sazonais ou de longo prazo que não foram capturadas nesta análise estática.
 
-Para futuras análises, seria interessante:
-- **Incluir variáveis adicionais** como dados demográficos, datas de promoções e categorias de produtos para uma análise mais rica.
-- **Aplicar técnicas de segmentação de mercado** para entender melhor os diferentes comportamentos dos consumidores em relação aos preços.
-- **Realizar análises temporais** para identificar sazonalidades ou padrões ao longo do tempo.
+Para futuras análises, seria interessante: - **Incluir variáveis adicionais** como dados demográficos, datas de promoções e categorias de produtos para uma análise mais rica. - **Aplicar técnicas de segmentação de mercado** para entender melhor os diferentes comportamentos dos consumidores em relação aos preços. - **Realizar análises temporais** para identificar sazonalidades ou padrões ao longo do tempo.
 
 Essas melhorias podem fornecer insights ainda mais profundos e direcionar estratégias mais eficazes de vendas e marketing.
-
-
-
-
-
-
-
-
-
-
-
 
 ```{r}
 # 1. Carregamento e Preparação dos Dados 
@@ -249,7 +232,6 @@ store_data <- read.csv("C:/Users/Inteli/Downloads/EPA-PONDERADA/store_final.csv"
 head(store_data)
 
 ```
-
 
 ```{r}
 # 2. Verificação da Estrutura dos Dados 
@@ -263,9 +245,10 @@ summary(store_data)
 
 
 ```
-# Esta função retorna um resumo estatístico de cada variável no conjunto de dados, incluindo medidas como média, mediana, quartis, etc.
 
-# 2.2 Descrição das Variáveis 
+## Esta função retorna um resumo estatístico de cada variável no conjunto de dados, incluindo medidas como média, mediana, quartis, etc.
+
+# 2.2 Descrição das Variáveis
 
 # Descrição das variáveis no conjunto de dados:
 
@@ -276,7 +259,6 @@ summary(store_data)
 ##diretoria: Diretoria ou área administrativa.
 
 ##data_inauguracao: Data de inauguração da loja.
-
 
 ```{r}
 # Converter a variável data_inauguracao para o formato Date
@@ -294,8 +276,6 @@ freq_data$mes_ano <- as.numeric(freq_data$mes_ano)
 
 ```
 
-
-
 ```{r}
 # Calcular a correlação entre o mês e a frequência
 correlation <- cor(freq_data$mes_ano, freq_data$frequencia)
@@ -303,6 +283,7 @@ print(paste("Correlação entre mês e frequência: ", correlation))
 
 
 ```
+
 ```{r}
 # Criar um gráfico de barras com a biblioteca graphics
 barplot(freq_data$frequencia, 
@@ -317,8 +298,6 @@ barplot(freq_data$frequencia,
 
 
 ```
-
-
 
 ```{r}
 # Carregar pacotes necessários
@@ -340,6 +319,7 @@ ggplot(wine_data, aes(x = regiao, y = data_inauguracao, color = regiao)) +
 
 
 ```
+
 ```{r}
 
 # Carregar as bibliotecas necessárias
@@ -391,10 +371,6 @@ corrplot(correlation_matrix,
 
 ```
 
-
-
-
-
 ```{r}
 # Verificar quais colunas são numéricas
 numeric_columns <- sapply(store_data, is.numeric)
@@ -405,21 +381,28 @@ summary(store_data[, numeric_columns])
 
 ```
 
-
-# 6. Conclusão e Discussão 
+# 6. Conclusão e Discussão
 
 # 6.1 Sumário das Descobertas
-# Principais descobertas: 
+
+# Principais descobertas:
+
 # A análise revelou a distribuição e as relações entre as datas de inauguração das lojas,
+
 # regiões e outras variáveis.
+
 # Outliers: Foram identificados possíveis outliers nas datas de inauguração.
 
 # 6.2 Discussão sobre Limitações e Possíveis Melhorias
-# Limitações: 
+
+# Limitações:
+
 # A análise é limitada pela natureza categórica da maioria das variáveis,
+
 # o que torna algumas técnicas estatísticas avançadas menos aplicáveis.
-# Melhorias: 
-# Análises futuras poderiam incluir variáveis adicionais ou explorar previsões de 
+
+# Melhorias:
+
+# Análises futuras poderiam incluir variáveis adicionais ou explorar previsões de
+
 # séries temporais com base nas datas de inauguração.
-
-
