@@ -97,8 +97,7 @@ identifica_outliers <- function(x) {
 # Identificação de outliers para a variável 'preco'
 outliers_preco <- identifica_outliers(cod_data$preco)
 print("Outliers identificados na variável 'preco':")
-print(outliers_preco)
-
+print(head(outliers_preco, 10))
 # Boxplot para 'preco'
 boxplot(cod_data$preco, 
         main = "Preço do produto", 
@@ -110,7 +109,8 @@ boxplot(cod_data$preco,
 # Identificação de outliers para a variável 'quantidade'
 outliers_quantidade <- identifica_outliers(cod_data$quantidade)
 print("Outliers identificados na variável 'quantidade':")
-print(outliers_quantidade)
+print(head(outliers_quantidade, 10))
+
 
 # Boxplot para 'quantidade'
 boxplot(cod_data$quantidade, 
