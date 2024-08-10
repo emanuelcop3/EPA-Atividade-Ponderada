@@ -1,3 +1,7 @@
+---
+---
+---
+
 ## Instalação de Pacotes
 
 ```{r}
@@ -91,12 +95,12 @@ identifica_outliers <- function(x) {
 }
 
 # Identificação de outliers para a variável 'preco'
-outliers_preco <- identifica_outliers(cod_data_sample$preco)
+outliers_preco <- identifica_outliers(cod_data$preco)
 print("Outliers identificados na variável 'preco':")
 print(outliers_preco)
 
 # Boxplot para 'preco'
-boxplot(cod_data_sample$preco, 
+boxplot(cod_data$preco, 
         main = "Preço do produto", 
         ylab = "Preço do produto", 
         col = "lightblue", 
@@ -104,12 +108,12 @@ boxplot(cod_data_sample$preco,
         outline = TRUE)  # Exibe outliers
 
 # Identificação de outliers para a variável 'quantidade'
-outliers_quantidade <- identifica_outliers(cod_data_sample$quantidade)
+outliers_quantidade <- identifica_outliers(cod_data$quantidade)
 print("Outliers identificados na variável 'quantidade':")
 print(outliers_quantidade)
 
 # Boxplot para 'quantidade'
-boxplot(cod_data_sample$quantidade, 
+boxplot(cod_data$quantidade, 
         main = " Quantidade ", 
         ylab = "Quantidade", 
         col = "lightblue", 
@@ -305,11 +309,11 @@ library(ggplot2)
 library(lubridate)
 
 # Converter a data de inauguração para formato de fator se necessário
-wine_data <- wine_data %>%
+store_data <- store_data %>%
   mutate(data_inauguracao = as.Date(data_inauguracao))
 
 # Criar o boxplot
-ggplot(wine_data, aes(x = regiao, y = data_inauguracao, color = regiao)) +
+ggplot(store_data, aes(x = regiao, y = data_inauguracao, color = regiao)) +
   geom_boxplot() +
   theme_minimal() +
   labs(title = "Relação entre Regiões e Datas de Inauguração", x = "Região", y = "Data de Inauguração") +
